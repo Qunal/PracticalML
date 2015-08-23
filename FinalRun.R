@@ -1,7 +1,8 @@
 #Project Practical ML Coursera Arvind WOrk
 library(caret)
 # Set workspace. Chnage for Your machine
-WorkingDir="I:/Users/Arvind/Downloads/MOOC/MAchineLearning/Class_Practical ML/Exercises/Project"
+WorkingDir="~/GitHub/PracticalML"
+WorkingDir='I:\Users\Arvind\Documents\GitHub\PracticalML'
 # Read data in
 setwd(WorkingDir)
 pml.training <- read.csv("pml-training.csv") # 19622 rows of 160 columns
@@ -54,7 +55,7 @@ library(parallel)
 cl<-makeCluster(2)
 
 #Defaut Randon Forest Train takes too much time change it
-customGrid <- data.frame(mtry=c(5,9,15))# Do not want 75 forest and 10,000 trees
+customGrid <- data.frame(mtry=c(5,15,27))# Do not want 75 forest and 10,000 trees
 cctrl3 <- trainControl(method = "cv", number = 3,allowParallel = TRUE)
 ModFit<-train(classe~.,data=TrainData,method="rf",trControl=cctrl3,prox=TRUE,
               returnData=FALSE, returnResamp="none", savePredictions=FALSE,
@@ -157,3 +158,14 @@ write.csv(PredictOut,"Predict.csv")
 # Check reading back
 In<-read.csv("Predict.csv",row.names=1)
 
+# Read the submission instructions
+pml_write_files = function(x){
+  n = length(x)
+  for(i in 1:n){
+    filename = paste0("problem_id_",i,".txt")
+    write.table(x[i],file=filename,quote=FALSE,row.names=FALSE,col.names=FALSE)
+  }
+}
+
+setwd("OutPut")
+pml_write_files(PredictOut)

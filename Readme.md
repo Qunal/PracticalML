@@ -107,5 +107,7 @@ Read into R with
 In<-read.csv("predict.csv",row.names=1)
 
 ~~~
-
+Individial files as required by submission are in sub directory OutPut.
+The predictions are
+B  A  B  A  A  E  D  B  A  A  B  C  B  A  E  E  A  B  B  B 
  
