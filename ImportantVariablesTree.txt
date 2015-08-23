@@ -1,0 +1,19 @@
+Importance Tree
+roll_belt
+960.03475
+pitch_forearm
+626.79284
+yaw_belt
+600.95122
+magnet_dumbbell_z
+507.70342
+magnet_dumbbell_y
+493.61309
+pitch_belt
+490.21550
+roll_forearm
+454.28409
+magnet_dumbbell_x
+262.92390
+roll_dumbbell
+235.79208

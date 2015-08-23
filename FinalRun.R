@@ -1,8 +1,8 @@
 #Project Practical ML Coursera Arvind WOrk
 library(caret)
 # Set workspace. Chnage for Your machine
-WorkingDir="I:/Users/Arvind/Downloads/MOOC/MAchineLearning/Class_Practical ML/Exercises/Project"
-# Read data in
+WorkingDir="~/GitHub/PracticalML"
+# Read data in  
 setwd(WorkingDir)
 pml.training <- read.csv("pml-training.csv") # 19622 rows of 160 columns
 pml.testing <- read.csv("pml-testing.csv") # 20 rows of 160 Variables
@@ -25,28 +25,24 @@ na_col<-subset(na_count,na_count==0)# 87 predictors only!!
 X.noNAN<-pml.training[names(pml.training) %in% rownames(na_col)]#87 variables no NAN but Factors also
 X.noNAN<-cbind(X.noNAN,pml.training$classe)
 # Rename Column 
-names(X.noNAN)[names(X.noNAN)=="pml.training$classe"] <- "classe" # Not NA but FActor also
+names(X.noNAN)[names(X.noNAN)=="pml.training$classe"]<- "classe" # Not NA but FActor also
 
 # Non NUmeric and No NAN Data
 X.noNANnum<-X.num[names(X.num) %in% rownames(na_col)]# 52 Vars numeric and no NA in rows
 X.noNANnum<-cbind(X.noNANnum,pml.training$classe)
 # Rename Column 
-names(X.noNANnum)[names(X.noNANnum)=="pml.training$classe"] <- "classe"
+names(X.noNANnum)[names(X.noNANnum)=="pml.training$classe"]<- "classe"
 #use Non numeric, non NA predictors
 
 X.train<-X.noNANnum # Final Run 19,622 obs of 52 variables +Outcme classe
 
 #
 inTrain = createDataPartition(X.train$classe, p = 0.6)[[1]]
-TrainData = X.train[ inTrain,]
-TestData = X.train[-inTrain,]
+TrainData = X.train[ inTrain,] #11,776 ROWS
+TestData = X.train[-inTrain,] #7846 rOWS
 
 
 # Final-----------------------------------------------------------------
-
-library(caret)
-
-
 
 # Final Random FOrest over 52 No NA variables gve over 99% accuracy-------------------------------------------------------------------
 set.seed(1234)
@@ -60,11 +56,11 @@ ModFit<-train(classe~.,data=TrainData,method="rf",trControl=cctrl3,prox=TRUE,
               returnData=FALSE, returnResamp="none", savePredictions=FALSE,
               #           tuneGrid=customGrid, 
               ntree=101)
-ModFit$time$everything[3]/60  #Time takeninmInutes
+ModFit$time$everything[3]/60  #Time taken 4 mInutes
 ModFit
 tic<-proc.time()
 Predict<-predict(ModFit,newdata=TestData)  
-(proc.time()-tic)[[3]]/60 # predict time in Minutes
+(proc.time()-tic)[[3]]/60 # predict time in Minutes 0.02
 #
 stopCluster(cl)
 #
