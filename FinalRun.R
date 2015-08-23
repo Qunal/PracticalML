@@ -73,9 +73,10 @@ CM
 accu<-CM$overall[1]#99.46%
 
 #Important vars
-varlist<-(varImp(ModFit))
-VarImp<-rowSums(varlist$importance,dim=1)/4
-sort(VarImp,decreasing=TRUE)# roll_belt,pitch_forearm,yaw_belt,magnet_dumbbell_z
+varlist<-varImp(ModFit)
+plot(varlist,main='Variable Importance of Top 20',top=20)
+# VarImp<-rowSums(varlist$importance,dim=1)/4
+# sort(VarImp,decreasing=TRUE)# roll_belt,pitch_forearm,yaw_belt,magnet_dumbbell_z
 
 # Visualizing results
 #AUC Not Usefull
@@ -147,4 +148,12 @@ Predict.Pred<-prediction(Predict.ROC,B)# MultiClass
 Predict.Perf<-performance(Predict.Pred, measure = 'tpr', x.measure = 'fpr')
 plot(Predict.Perf, col=1:5,main="ROC for Each Class A:E")
 abline(a=0, b= 1)
+
+# Test Data Prediction
+TestData<-pml.testing
+PredictOut<-predict(ModFit,newdata=TestData) # ModFit uses training columns only
+PredictOut
+write.csv(PredictOut,"Predict.csv")
+# Check reading back
+In<-read.csv("Predict.csv",row.names=1)
 
