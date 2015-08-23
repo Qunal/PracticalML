@@ -1,0 +1,35 @@
+For 10 Fold CV 
+
+#Defaut Randon Forest Train takes too much time change it
+> customGrid <- data.frame(mtry=c(5,9,15))# Do not want 75 forest and 10,000 trees
+> cctrl3 <- trainControl(method = "cv", number = 10,allowParallel = TRUE)
+> #ModFit<-train(classe~.,data=TrainData,method="rf",trControl=cctrl3,prox=TRUE,
+> ModFit<-train(classe~.,data=TrainData,method="rf",prox=TRUE,
++               returnData=FALSE, returnResamp="none", savePredictions=FALSE,
++               #           tuneGrid=customGrid, 
++               ntree=101)
+There were 50 or more warnings (use warnings() to see the first 50)
+> ModFit$time$everything[3]/60  #Time taken 4 mInutes
+ elapsed 
+42.10783 
+
+
+> ModFit
+Random Forest 
+
+11776 samples
+   52 predictor
+    5 classes: 'A', 'B', 'C', 'D', 'E' 
+
+No pre-processing
+Resampling: Bootstrapped (25 reps) 
+Summary of sample sizes: 11776, 11776, 11776, 11776, 11776, 11776, ... 
+Resampling results across tuning parameters:
+
+  mtry  Accuracy   Kappa      Accuracy SD  Kappa SD   
+   2    0.9863125  0.9826825  0.001387839  0.001761581
+  27    0.9863907  0.9827842  0.001994573  0.002521394
+  52    0.9733553  0.9662941  0.005226092  0.006620341
+
+Accuracy was used to select the optimal model using  the largest value.
+The final value used for the model was mtry = 27. 

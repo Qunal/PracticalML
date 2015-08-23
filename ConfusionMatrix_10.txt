@@ -1,0 +1,32 @@
+10 Fold CV Run Random Forest
+Confusion Matrix and Statistics
+
+          Reference
+Prediction    A    B    C    D    E
+         A 2229   20    0    0    0
+         B    3 1492   13    2    1
+         C    0    6 1350   26    1
+         D    0    0    5 1254    6
+         E    0    0    0    4 1434
+
+Overall Statistics
+                                          
+               Accuracy : 0.9889          
+                 95% CI : (0.9863, 0.9911)
+    No Information Rate : 0.2845          
+    P-Value [Acc > NIR] : < 2.2e-16       
+                                          
+                  Kappa : 0.986           
+ Mcnemar's Test P-Value : NA              
+
+Statistics by Class:
+
+                     Class: A Class: B Class: C Class: D Class: E
+Sensitivity            0.9987   0.9829   0.9868   0.9751   0.9945
+Specificity            0.9964   0.9970   0.9949   0.9983   0.9994
+Pos Pred Value         0.9911   0.9874   0.9761   0.9913   0.9972
+Neg Pred Value         0.9995   0.9959   0.9972   0.9951   0.9988
+Prevalence             0.2845   0.1935   0.1744   0.1639   0.1838
+Detection Rate         0.2841   0.1902   0.1721   0.1598   0.1828
+Detection Prevalence   0.2866   0.1926   0.1763   0.1612   0.1833
+Balanced Accuracy      0.9975   0.9899   0.9909   0.9867   0.9969

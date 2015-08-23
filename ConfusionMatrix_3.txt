@@ -1,4 +1,4 @@
- CM
+ CM 3 Fold CV
 Confusion Matrix and Statistics
 
           Reference

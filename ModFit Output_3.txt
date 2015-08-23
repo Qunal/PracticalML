@@ -1,4 +1,4 @@
-Random Forest 
+Random Forest 3 Fold CV
 
 11776 samples
    52 predictor
